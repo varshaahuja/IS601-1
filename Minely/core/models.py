@@ -6,6 +6,10 @@ from app import db
 
 class PurchaseType(enum.Enum):
     LAND = 1
+    WORKER = 2
+    WORKER_LFG = 3
+    LAND_SURVEY = 4
+    SMELTER = 5
 
     def __str__(self):
         return self.name  # value string
@@ -20,7 +24,8 @@ class Purchase(db.Model):
     created = db.Column(db.DateTime, default=datetime.utcnow())
     # do we need to know about modified?
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    purchase_type = db.Column(db.Enum(PurchaseType))
+    purchase_type = db.Column(db.Enum(PurchaseType, create_constraint=False))
+
 
 
 
